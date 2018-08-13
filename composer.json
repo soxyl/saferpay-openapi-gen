@@ -1,0 +1,13 @@
+{
+    "name": "soxyl/saferpay-openapi-gen",
+    "description": "A generator for building an openapi spec file out of the Saferpay JSON API Docs",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Samuel Wicky",
+            "email": "s@wicky.io"
+        }
+    ],
+    "require": {}
+}
