@@ -1,0 +1,3669 @@
+openapi: 3.0.0
+info:
+  title: 'Saferpay JSON API'
+  version: 1.10.0
+servers:
+  -
+    url: 'https://www.saferpay.com/api/Payment/v1'
+    description: 'Production System'
+  -
+    url: 'https://test.saferpay.com/api/Payment/v1'
+    description: 'Test System'
+paths:
+  /PaymentPage/Initialize:
+    post:
+      description: 'This method can be used to start a transaction with the Payment Page which may involve either DCC and / or 3d-secure'
+      tags:
+        - PaymentPage
+      requestBody:
+        $ref: '#/components/requestBodies/PaymentPageInitialize'
+      responses:
+        200:
+          $ref: '#/components/responses/PaymentPageInitialize'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /PaymentPage/Assert:
+    post:
+      description: 'Call this function to safely check the status of the transaction from your server. Depending on the payment provider, the resulting transaction may either be an authorization or may already be captured (meaning the financial flow was already triggered). This will be visible in the status of the transaction container returned in the response.'
+      tags:
+        - PaymentPage
+      requestBody:
+        $ref: '#/components/requestBodies/PaymentPageAssert'
+      responses:
+        200:
+          $ref: '#/components/responses/PaymentPageAssert'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/Initialize:
+    post:
+      description: 'This method may be used to start a transaction which may involve either DCC and / or 3d-secure.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionInitialize'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionInitialize'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/Authorize:
+    post:
+      description: 'This function may be called to authorize a transaction which was started by a call to Transaction/Initialize.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionAuthorize'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionAuthorize'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/QueryPaymentMeans:
+    post:
+      description: 'This method may be used to query the payment means and payer data (address) after initialize and wallet redirect.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionQueryPaymentMeans'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionQueryPaymentMeans'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/AdjustAmount:
+    post:
+      description: 'This method may be used to adjust the amount after query payment means.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionAdjustAmount'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionAdjustAmount'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/AuthorizeDirect:
+    post:
+      description: 'This function may be used to directly authorize transactions which do not require a redirect of the customer (e.g. direct debit or recurring transactions based on a previously registered alias).'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionAuthorizeDirect'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionAuthorizeDirect'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/AuthorizeReferenced:
+    post:
+      description: 'This method may be used to perform follow-up authorizations to an earlier transaction. At this time, the referenced (initial) transaction must have been performed setting either the recurring or installment option.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionAuthorizeReferenced'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionAuthorizeReferenced'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/Capture:
+    post:
+      description: 'This method may be used to finalize previously authorized transactions and refunds.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionCapture'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionCapture'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/MultipartCapture:
+    post:
+      description: 'This method may be used to capture multiple parts of an authorized transaction.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionMultipartCapture'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionMultipartCapture'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/AssertCapture:
+    post:
+      description: 'This method is only supported for pending capture transactions (only used for paydirekt at the moment)'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionAssertCapture'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionAssertCapture'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/MultipartFinalize:
+    post:
+      description: 'This method may be used to finalize an authorized transaction (i.e. marks the end of partial captures).'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionMultipartFinalize'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionMultipartFinalize'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/Refund:
+    post:
+      description: 'This method may be called to refund a previous transaction.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionRefund'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionRefund'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/AssertRefund:
+    post:
+      description: 'This method may be used to inquire the status and further information of pending refunds.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionAssertRefund'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionAssertRefund'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/RefundDirect:
+    post:
+      description: 'This method may be called to refund an amount to the given means of payment (not supported for all means of payment) without referencing a previous transaction. This might be the case if the original transaction was done with a card which is not valid any more.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionRefundDirect'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionRefundDirect'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/Cancel:
+    post:
+      description: 'This method may be used to cancel previously authorized transactions and refunds.'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionCancel'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionCancel'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/RedirectPayment:
+    post:
+      description: 'WARNING: This feature is deprecated and replaced by the Payment Page. Please use the parameter PaymentMethods to directly select the desired 3rd party provider!'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionRedirectPayment'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionRedirectPayment'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Transaction/AssertRedirectPayment:
+    post:
+      description: 'WARNING: This feature is deprecated and replaced by the Payment Page. Please use the parameter PaymentMethods to directly select the desired 3rd party provider!'
+      tags:
+        - Transaction
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionAssertRedirectPayment'
+      responses:
+        200:
+          $ref: '#/components/responses/TransactionAssertRedirectPayment'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Alias/Insert:
+    post:
+      description: 'This function may be used to insert an alias without knowledge about the card details. Therefore a redirect of the customer is required.'
+      tags:
+        - Alias
+      requestBody:
+        $ref: '#/components/requestBodies/AliasInsert'
+      responses:
+        200:
+          $ref: '#/components/responses/AliasInsert'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Alias/AssertInsert:
+    post:
+      description: 'This method may be used to inquire the Alias Id and further information after a successful Alias Insert call.'
+      tags:
+        - Alias
+      requestBody:
+        $ref: '#/components/requestBodies/AliasAssertInsert'
+      responses:
+        200:
+          $ref: '#/components/responses/AliasAssertInsert'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Alias/InsertDirect:
+    post:
+      description: 'This method may be used to insert an alias directly with card-data collected by using your own HTML form.'
+      tags:
+        - Alias
+      requestBody:
+        $ref: '#/components/requestBodies/AliasInsertDirect'
+      responses:
+        200:
+          $ref: '#/components/responses/AliasInsertDirect'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Alias/Delete:
+    post:
+      description: 'This method may be used to delete previously inserted aliases.'
+      tags:
+        - Alias
+      requestBody:
+        $ref: '#/components/requestBodies/AliasDelete'
+      responses:
+        200:
+          $ref: '#/components/responses/AliasDelete'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /Batch/Close:
+    post:
+      description: 'This chapter covers the Batch Close via API'
+      tags:
+        - Batch
+      requestBody:
+        $ref: '#/components/requestBodies/BatchClose'
+      responses:
+        200:
+          $ref: '#/components/responses/BatchClose'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /OmniChannel/InsertAlias:
+    post:
+      description: 'This function may be used to create an alias by providing a SixTransactionReference.'
+      tags:
+        - OmniChannel
+      requestBody:
+        $ref: '#/components/requestBodies/OmniChannelInsertAlias'
+      responses:
+        200:
+          $ref: '#/components/responses/OmniChannelInsertAlias'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+  /OmniChannel/AcquireTransaction:
+    post:
+      description: 'This function may be used to acquire an authorized transaction by providing a SixTransactionReference. This transaction can then be captured or canceled.'
+      tags:
+        - OmniChannel
+      requestBody:
+        $ref: '#/components/requestBodies/OmniChannelAcquireTransaction'
+      responses:
+        200:
+          $ref: '#/components/responses/OmniChannelAcquireTransaction'
+        400:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: 'Authentication of the request failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        402:
+          description: 'Requested action failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        403:
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        406:
+          description: 'Not acceptable (wrong accept header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        415:
+          description: 'Unsupported media type (wrong content-type header)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+        500:
+          description: 'Internal error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                type: string
+security:
+  -
+    BasicAuth: []
+components:
+  schemas:
+    RequestHeader:
+      type: object
+      title: RequestHeader
+      properties:
+        SpecVersion:
+          type: string
+        CustomerId:
+          type: string
+        RequestId:
+          type: string
+        RetryIndicator:
+          type: integer
+        ClientInfo:
+          $ref: '#/components/schemas/ClientInfo'
+      required:
+        - SpecVersion
+        - CustomerId
+        - RequestId
+        - RetryIndicator
+    ResponseHeader:
+      type: object
+      title: ResponseHeader
+      properties:
+        RequestId:
+          type: string
+        SpecVersion:
+          type: string
+      required:
+        - RequestId
+        - SpecVersion
+    BankAccountInfo:
+      type: object
+      title: BankAccountInfo
+      properties:
+        IBAN:
+          type: string
+        HolderName:
+          type: string
+        BIC:
+          type: string
+        BankName:
+          type: string
+        CountryCode:
+          type: string
+      required:
+        - IBAN
+    CaptureReference:
+      type: object
+      title: CaptureReference
+      properties:
+        CaptureId:
+          type: string
+        TransactionId:
+          type: string
+        OrderId:
+          type: string
+        OrderPartId:
+          type: string
+    Address:
+      type: object
+      title: Address
+      properties:
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        DateOfBirth:
+          type: string
+        Company:
+          type: string
+        Gender:
+          type: string
+        LegalForm:
+          type: string
+        Street:
+          type: string
+        Street2:
+          type: string
+        Zip:
+          type: string
+        City:
+          type: string
+        CountrySubdivisionCode:
+          type: string
+        CountryCode:
+          type: string
+        Phone:
+          type: string
+        Email:
+          type: string
+    AddressForm:
+      type: object
+      title: AddressForm
+      properties:
+        Display:
+          type: boolean
+        MandatoryFields:
+          type: array
+          items:
+            type: string
+      required:
+        - Display
+    Alias:
+      type: object
+      title: Alias
+      properties:
+        Id:
+          type: string
+        VerificationCode:
+          type: string
+      required:
+        - Id
+    AliasInfo:
+      type: object
+      title: AliasInfo
+      properties:
+        Id:
+          type: string
+        Lifetime:
+          type: integer
+      required:
+        - Id
+        - Lifetime
+    AliasInsertCheck:
+      type: object
+      title: AliasInsertCheck
+      properties:
+        Type:
+          type: string
+        TerminalId:
+          type: string
+      required:
+        - Type
+        - TerminalId
+    AliasInsertCheckResult:
+      type: object
+      title: AliasInsertCheckResult
+      properties:
+        Result:
+          type: string
+        Message:
+          type: string
+      required:
+        - Result
+        - Message
+    Amount:
+      type: object
+      title: Amount
+      properties:
+        Value:
+          type: string
+        CurrencyCode:
+          type: string
+      required:
+        - Value
+        - CurrencyCode
+    BankAccount:
+      type: object
+      title: BankAccount
+      properties:
+        IBAN:
+          type: string
+        HolderName:
+          type: string
+        BIC:
+          type: string
+        BankName:
+          type: string
+      required:
+        - IBAN
+    BasicPayment:
+      type: object
+      title: BasicPayment
+      properties:
+        Amount:
+          $ref: '#/components/schemas/Amount'
+        OrderId:
+          type: string
+        Description:
+          type: string
+        PayerNote:
+          type: string
+      required:
+        - Amount
+    BillpayCapture:
+      type: object
+      title: BillpayCapture
+      properties:
+        DelayInDays:
+          type: integer
+    Brand:
+      type: object
+      title: Brand
+      properties:
+        PaymentMethod:
+          type: string
+        Name:
+          type: string
+      required:
+        - Name
+    Card:
+      type: object
+      title: Card
+      properties:
+        Number:
+          type: string
+        ExpYear:
+          type: integer
+        ExpMonth:
+          type: integer
+        HolderName:
+          type: string
+        VerificationCode:
+          type: string
+      required:
+        - Number
+        - ExpYear
+        - ExpMonth
+    CardForm:
+      type: object
+      title: CardForm
+      properties:
+        HolderName:
+          type: string
+    CardInfo:
+      type: object
+      title: CardInfo
+      properties:
+        MaskedNumber:
+          type: string
+        ExpYear:
+          type: integer
+        ExpMonth:
+          type: integer
+        HolderName:
+          type: string
+        CountryCode:
+          type: string
+        HashValue:
+          type: string
+      required:
+        - MaskedNumber
+        - ExpYear
+        - ExpMonth
+    ClientInfo:
+      type: object
+      title: ClientInfo
+      properties:
+        ShopInfo:
+          type: string
+        OsInfo:
+          type: string
+    DccInfo:
+      type: object
+      title: DccInfo
+      properties:
+        PayerAmount:
+          $ref: '#/components/schemas/Amount'
+      required:
+        - PayerAmount
+    DirectDebitInfo:
+      type: object
+      title: DirectDebitInfo
+      properties:
+        MandateId:
+          type: string
+        CreditorId:
+          type: string
+      required:
+        - MandateId
+        - CreditorId
+    FraudFreeInfo:
+      type: object
+      title: FraudFreeInfo
+      properties:
+        Id:
+          type: string
+        LiabilityShift:
+          type: boolean
+        Score:
+          type: number
+          format: double
+        Investigationpoints:
+          type: array
+          items:
+            type: string
+        ErrorMessage:
+          type: string
+      required:
+        - Id
+        - LiabilityShift
+        - Score
+    InstallmentOptions:
+      type: object
+      title: InstallmentOptions
+      properties:
+        Initial:
+          type: boolean
+      required:
+        - Initial
+    InvoiceInfo:
+      type: object
+      title: InvoiceInfo
+      properties:
+        Payee:
+          $ref: '#/components/schemas/BankAccount'
+        ReasonForTransfer:
+          type: string
+        DueDate:
+          type: string
+          format: date
+    LiabilityInfo:
+      type: object
+      title: LiabilityInfo
+      properties:
+        LiabilityShift:
+          type: boolean
+        LiableEntity:
+          type: string
+        ThreeDs:
+          $ref: '#/components/schemas/ThreeDsInfo'
+        FraudFree:
+          $ref: '#/components/schemas/FraudFreeInfo'
+      required:
+        - LiabilityShift
+        - LiableEntity
+    MarketplaceCapture:
+      type: object
+      title: MarketplaceCapture
+      properties:
+        SubmerchantId:
+          type: string
+        Fee:
+          $ref: '#/components/schemas/Amount'
+        FeeRefund:
+          $ref: '#/components/schemas/Amount'
+      required:
+        - SubmerchantId
+    Notification:
+      type: object
+      title: Notification
+      properties:
+        MerchantEmail:
+          type: string
+        PayerEmail:
+          type: string
+        NotifyUrl:
+          type: string
+    Payer:
+      type: object
+      title: Payer
+      properties:
+        IpAddress:
+          type: string
+        LanguageCode:
+          type: string
+        DeliveryAddress:
+          $ref: '#/components/schemas/Address'
+        BillingAddress:
+          $ref: '#/components/schemas/Address'
+    PayerInfo:
+      type: object
+      title: PayerInfo
+      properties:
+        IpAddress:
+          type: string
+        IpLocation:
+          type: string
+        DeliveryAddress:
+          $ref: '#/components/schemas/Address'
+        BillingAddress:
+          $ref: '#/components/schemas/Address'
+    Payment:
+      type: object
+      title: Payment
+      properties:
+        Amount:
+          $ref: '#/components/schemas/Amount'
+        OrderId:
+          type: string
+        Description:
+          type: string
+        PayerNote:
+          type: string
+        MandateId:
+          type: string
+        Options:
+          $ref: '#/components/schemas/PaymentOptions'
+        Recurring:
+          $ref: '#/components/schemas/RecurringOptions'
+        Installment:
+          $ref: '#/components/schemas/InstallmentOptions'
+      required:
+        - Amount
+    PaymentMeans:
+      type: object
+      title: PaymentMeans
+      properties:
+        Card:
+          $ref: '#/components/schemas/Card'
+        BankAccount:
+          $ref: '#/components/schemas/BankAccount'
+        Alias:
+          $ref: '#/components/schemas/Alias'
+    PaymentMeansInfo:
+      type: object
+      title: PaymentMeansInfo
+      properties:
+        Brand:
+          $ref: '#/components/schemas/Brand'
+        DisplayText:
+          type: string
+        Wallet:
+          type: string
+        Card:
+          $ref: '#/components/schemas/CardInfo'
+        BankAccount:
+          $ref: '#/components/schemas/BankAccountInfo'
+      required:
+        - Brand
+        - DisplayText
+    PaymentOptions:
+      type: object
+      title: PaymentOptions
+      properties:
+        PreAuth:
+          type: boolean
+    PaymentPagePayment:
+      type: object
+      title: PaymentPagePayment
+      properties:
+        Amount:
+          $ref: '#/components/schemas/Amount'
+        OrderId:
+          type: string
+        Description:
+          type: string
+        PayerNote:
+          type: string
+        MandateId:
+          type: string
+        Options:
+          $ref: '#/components/schemas/PaymentOptions'
+        Recurring:
+          $ref: '#/components/schemas/RecurringOptions'
+        Installment:
+          $ref: '#/components/schemas/InstallmentOptions'
+      required:
+        - Amount
+        - Description
+    PaymentTransaction:
+      type: object
+      title: PaymentTransaction
+      properties:
+        Type:
+          type: string
+        Status:
+          type: string
+        Id:
+          type: string
+        Date:
+          type: string
+          format: date
+        Amount:
+          $ref: '#/components/schemas/Amount'
+        OrderId:
+          type: string
+        AcquirerName:
+          type: string
+        AcquirerReference:
+          type: string
+        SixTransactionReference:
+          type: string
+        ApprovalCode:
+          type: string
+        DirectDebit:
+          $ref: '#/components/schemas/DirectDebitInfo'
+        Invoice:
+          $ref: '#/components/schemas/InvoiceInfo'
+      required:
+        - Type
+        - Status
+        - Id
+        - Date
+        - Amount
+        - SixTransactionReference
+    PendingNotification:
+      type: object
+      title: PendingNotification
+      properties:
+        MerchantEmail:
+          type: string
+        NotifyUrl:
+          type: string
+    RecurringOptions:
+      type: object
+      title: RecurringOptions
+      properties:
+        Initial:
+          type: boolean
+      required:
+        - Initial
+    Redirect:
+      type: object
+      title: Redirect
+      properties:
+        RedirectUrl:
+          type: string
+        PaymentMeansRequired:
+          type: boolean
+      required:
+        - RedirectUrl
+        - PaymentMeansRequired
+    Refund:
+      type: object
+      title: Refund
+      properties:
+        Amount:
+          $ref: '#/components/schemas/Amount'
+        OrderId:
+          type: string
+        Description:
+          type: string
+      required:
+        - Amount
+    RefundTransaction:
+      type: object
+      title: RefundTransaction
+      properties:
+        Type:
+          type: string
+        Status:
+          type: string
+        Id:
+          type: string
+        Date:
+          type: string
+          format: date
+        Amount:
+          $ref: '#/components/schemas/Amount'
+        OrderId:
+          type: string
+        AcquirerName:
+          type: string
+        AcquirerReference:
+          type: string
+        SixTransactionReference:
+          type: string
+        ApprovalCode:
+          type: string
+        DirectDebit:
+          $ref: '#/components/schemas/DirectDebitInfo'
+        Invoice:
+          $ref: '#/components/schemas/InvoiceInfo'
+      required:
+        - Type
+        - Status
+        - Id
+        - Date
+        - Amount
+        - SixTransactionReference
+    RegisterAlias:
+      type: object
+      title: RegisterAlias
+      properties:
+        IdGenerator:
+          type: string
+        Id:
+          type: string
+        Lifetime:
+          type: integer
+      required:
+        - IdGenerator
+    RegistrationErrorInfo:
+      type: object
+      title: RegistrationErrorInfo
+      properties:
+        ErrorName:
+          type: string
+        ErrorMessage:
+          type: string
+    RegistrationResult:
+      type: object
+      title: RegistrationResult
+      properties:
+        Success:
+          type: boolean
+        Alias:
+          $ref: '#/components/schemas/AliasInfo'
+        Error:
+          $ref: '#/components/schemas/RegistrationErrorInfo'
+      required:
+        - Success
+    ReturnUrls:
+      type: object
+      title: ReturnUrls
+      properties:
+        Success:
+          type: string
+        Fail:
+          type: string
+        Abort:
+          type: string
+      required:
+        - Success
+        - Fail
+    Styling:
+      type: object
+      title: Styling
+      properties:
+        CssUrl:
+          type: string
+        ContentSecurityEnabled:
+          type: boolean
+        Theme:
+          type: string
+    ThreeDsInfo:
+      type: object
+      title: ThreeDsInfo
+      properties:
+        Authenticated:
+          type: boolean
+        LiabilityShift:
+          type: boolean
+        Xid:
+          type: string
+        VerificationValue:
+          type: string
+      required:
+        - Authenticated
+        - LiabilityShift
+        - Xid
+    TransactionReference:
+      type: object
+      title: TransactionReference
+      properties:
+        TransactionId:
+          type: string
+        OrderId:
+          type: string
+    Wallet:
+      type: object
+      title: Wallet
+      properties:
+        Type:
+          type: string
+        PaymentMethods:
+          type: array
+          items:
+            type: string
+        RequestDeliveryAddress:
+          type: boolean
+        EnableAmountAdjustment:
+          type: boolean
+      required:
+        - Type
+    ErrorResponse:
+      type: object
+      title: ErrorResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Behavior:
+          type: string
+        ErrorName:
+          type: string
+        ErrorMessage:
+          type: string
+        TransactionId:
+          type: string
+        ErrorDetail:
+          type: array
+          items:
+            type: string
+        ProcessorName:
+          type: string
+        ProcessorResult:
+          type: string
+        ProcessorMessage:
+          type: string
+      required:
+        - ResponseHeader
+        - Behavior
+        - ErrorName
+        - ErrorMessage
+    PaymentPageInitializeRequest:
+      type: object
+      title: PaymentPageInitializeRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        ConfigSet:
+          type: string
+        TerminalId:
+          type: string
+        Payment:
+          $ref: '#/components/schemas/PaymentPagePayment'
+        PaymentMethods:
+          type: array
+          items:
+            type: string
+        Wallets:
+          type: array
+          items:
+            type: string
+        Payer:
+          $ref: '#/components/schemas/Payer'
+        RegisterAlias:
+          $ref: '#/components/schemas/RegisterAlias'
+        ReturnUrls:
+          $ref: '#/components/schemas/ReturnUrls'
+        Notification:
+          $ref: '#/components/schemas/Notification'
+        Styling:
+          $ref: '#/components/schemas/Styling'
+        BillingAddressForm:
+          $ref: '#/components/schemas/AddressForm'
+        DeliveryAddressForm:
+          $ref: '#/components/schemas/AddressForm'
+        CardForm:
+          $ref: '#/components/schemas/CardForm'
+      required:
+        - RequestHeader
+        - TerminalId
+        - Payment
+        - ReturnUrls
+    PaymentPageInitializeResponse:
+      type: object
+      title: PaymentPageInitializeResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Token:
+          type: string
+        Expiration:
+          type: string
+          format: date
+        RedirectUrl:
+          type: string
+      required:
+        - ResponseHeader
+        - Token
+        - Expiration
+        - RedirectUrl
+    PaymentPageAssertRequest:
+      type: object
+      title: PaymentPageAssertRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        Token:
+          type: string
+      required:
+        - RequestHeader
+        - Token
+    PaymentPageAssertResponse:
+      type: object
+      title: PaymentPageAssertResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Transaction:
+          $ref: '#/components/schemas/PaymentTransaction'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        Payer:
+          $ref: '#/components/schemas/PayerInfo'
+        RegistrationResult:
+          $ref: '#/components/schemas/RegistrationResult'
+        Liability:
+          $ref: '#/components/schemas/LiabilityInfo'
+        Dcc:
+          $ref: '#/components/schemas/DccInfo'
+      required:
+        - ResponseHeader
+        - Transaction
+        - PaymentMeans
+    TransactionInitializeRequest:
+      type: object
+      title: TransactionInitializeRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        ConfigSet:
+          type: string
+        TerminalId:
+          type: string
+        Payment:
+          $ref: '#/components/schemas/Payment'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeans'
+        Payer:
+          $ref: '#/components/schemas/Payer'
+        ReturnUrls:
+          $ref: '#/components/schemas/ReturnUrls'
+        Styling:
+          $ref: '#/components/schemas/Styling'
+        Wallet:
+          $ref: '#/components/schemas/Wallet'
+        PaymentMethods:
+          type: array
+          items:
+            type: string
+        CardForm:
+          $ref: '#/components/schemas/CardForm'
+      required:
+        - RequestHeader
+        - TerminalId
+        - Payment
+        - ReturnUrls
+    TransactionInitializeResponse:
+      type: object
+      title: TransactionInitializeResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Token:
+          type: string
+        Expiration:
+          type: string
+          format: date
+        LiabilityShift:
+          type: boolean
+        RedirectRequired:
+          type: boolean
+        Redirect:
+          $ref: '#/components/schemas/Redirect'
+      required:
+        - ResponseHeader
+        - Token
+        - Expiration
+        - RedirectRequired
+    TransactionAuthorizeRequest:
+      type: object
+      title: TransactionAuthorizeRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        Token:
+          type: string
+        Condition:
+          type: string
+        VerificationCode:
+          type: string
+        RegisterAlias:
+          $ref: '#/components/schemas/RegisterAlias'
+      required:
+        - RequestHeader
+        - Token
+    TransactionAuthorizeResponse:
+      type: object
+      title: TransactionAuthorizeResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Transaction:
+          $ref: '#/components/schemas/PaymentTransaction'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        Payer:
+          $ref: '#/components/schemas/PayerInfo'
+        RegistrationResult:
+          $ref: '#/components/schemas/RegistrationResult'
+        Liability:
+          $ref: '#/components/schemas/LiabilityInfo'
+        Dcc:
+          $ref: '#/components/schemas/DccInfo'
+      required:
+        - ResponseHeader
+        - Transaction
+        - PaymentMeans
+    TransactionQueryPaymentMeansRequest:
+      type: object
+      title: TransactionQueryPaymentMeansRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        Token:
+          type: string
+        ReturnUrls:
+          $ref: '#/components/schemas/ReturnUrls'
+      required:
+        - RequestHeader
+        - Token
+    TransactionQueryPaymentMeansResponse:
+      type: object
+      title: TransactionQueryPaymentMeansResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        Payer:
+          $ref: '#/components/schemas/PayerInfo'
+        RedirectRequired:
+          type: boolean
+        RedirectUrl:
+          type: string
+      required:
+        - ResponseHeader
+        - PaymentMeans
+        - RedirectRequired
+    TransactionAdjustAmountRequest:
+      type: object
+      title: TransactionAdjustAmountRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        Token:
+          type: string
+        Amount:
+          $ref: '#/components/schemas/Amount'
+      required:
+        - RequestHeader
+        - Token
+        - Amount
+    TransactionAdjustAmountResponse:
+      type: object
+      title: TransactionAdjustAmountResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+      required:
+        - ResponseHeader
+    TransactionAuthorizeDirectRequest:
+      type: object
+      title: TransactionAuthorizeDirectRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TerminalId:
+          type: string
+        Payment:
+          $ref: '#/components/schemas/Payment'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeans'
+        RegisterAlias:
+          $ref: '#/components/schemas/RegisterAlias'
+        Payer:
+          $ref: '#/components/schemas/Payer'
+      required:
+        - RequestHeader
+        - TerminalId
+        - Payment
+        - PaymentMeans
+    TransactionAuthorizeDirectResponse:
+      type: object
+      title: TransactionAuthorizeDirectResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Transaction:
+          $ref: '#/components/schemas/PaymentTransaction'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        Payer:
+          $ref: '#/components/schemas/PayerInfo'
+        RegistrationResult:
+          $ref: '#/components/schemas/RegistrationResult'
+      required:
+        - ResponseHeader
+        - Transaction
+        - PaymentMeans
+    TransactionAuthorizeReferencedRequest:
+      type: object
+      title: TransactionAuthorizeReferencedRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TerminalId:
+          type: string
+        Payment:
+          $ref: '#/components/schemas/BasicPayment'
+        TransactionReference:
+          $ref: '#/components/schemas/TransactionReference'
+        SuppressDcc:
+          type: boolean
+      required:
+        - RequestHeader
+        - TerminalId
+        - Payment
+        - TransactionReference
+    TransactionAuthorizeReferencedResponse:
+      type: object
+      title: TransactionAuthorizeReferencedResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Transaction:
+          $ref: '#/components/schemas/PaymentTransaction'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        Payer:
+          $ref: '#/components/schemas/PayerInfo'
+        Dcc:
+          $ref: '#/components/schemas/DccInfo'
+      required:
+        - ResponseHeader
+        - Transaction
+        - PaymentMeans
+    TransactionCaptureRequest:
+      type: object
+      title: TransactionCaptureRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TransactionReference:
+          $ref: '#/components/schemas/TransactionReference'
+        Amount:
+          $ref: '#/components/schemas/Amount'
+        Billpay:
+          $ref: '#/components/schemas/BillpayCapture'
+        PendingNotification:
+          $ref: '#/components/schemas/PendingNotification'
+        Marketplace:
+          $ref: '#/components/schemas/MarketplaceCapture'
+      required:
+        - RequestHeader
+        - TransactionReference
+    TransactionCaptureResponse:
+      type: object
+      title: TransactionCaptureResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        CaptureId:
+          type: string
+        Status:
+          type: string
+        Date:
+          type: string
+          format: date
+        Invoice:
+          $ref: '#/components/schemas/InvoiceInfo'
+      required:
+        - ResponseHeader
+        - Status
+    TransactionMultipartCaptureRequest:
+      type: object
+      title: TransactionMultipartCaptureRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TransactionReference:
+          $ref: '#/components/schemas/TransactionReference'
+        Amount:
+          $ref: '#/components/schemas/Amount'
+        Type:
+          type: string
+        OrderPartId:
+          type: string
+        Marketplace:
+          $ref: '#/components/schemas/MarketplaceCapture'
+      required:
+        - RequestHeader
+        - TransactionReference
+        - Amount
+        - Type
+        - OrderPartId
+    TransactionMultipartCaptureResponse:
+      type: object
+      title: TransactionMultipartCaptureResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        CaptureId:
+          type: string
+        Status:
+          type: string
+        Date:
+          type: string
+          format: date
+      required:
+        - ResponseHeader
+        - Status
+    TransactionAssertCaptureRequest:
+      type: object
+      title: TransactionAssertCaptureRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        CaptureReference:
+          $ref: '#/components/schemas/CaptureReference'
+      required:
+        - RequestHeader
+        - CaptureReference
+    TransactionAssertCaptureResponse:
+      type: object
+      title: TransactionAssertCaptureResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        TransactionId:
+          type: string
+        OrderId:
+          type: string
+        Status:
+          type: string
+        Date:
+          type: string
+          format: date
+      required:
+        - ResponseHeader
+        - TransactionId
+        - Status
+    TransactionMultipartFinalizeRequest:
+      type: object
+      title: TransactionMultipartFinalizeRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TransactionReference:
+          $ref: '#/components/schemas/TransactionReference'
+      required:
+        - RequestHeader
+        - TransactionReference
+    TransactionMultipartFinalizeResponse:
+      type: object
+      title: TransactionMultipartFinalizeResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+      required:
+        - ResponseHeader
+    TransactionRefundRequest:
+      type: object
+      title: TransactionRefundRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        Refund:
+          $ref: '#/components/schemas/Refund'
+        CaptureReference:
+          $ref: '#/components/schemas/CaptureReference'
+        PendingNotification:
+          $ref: '#/components/schemas/PendingNotification'
+      required:
+        - RequestHeader
+        - Refund
+        - CaptureReference
+    TransactionRefundResponse:
+      type: object
+      title: TransactionRefundResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Transaction:
+          $ref: '#/components/schemas/RefundTransaction'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        Dcc:
+          $ref: '#/components/schemas/DccInfo'
+      required:
+        - ResponseHeader
+        - Transaction
+        - PaymentMeans
+    TransactionAssertRefundRequest:
+      type: object
+      title: TransactionAssertRefundRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TransactionReference:
+          $ref: '#/components/schemas/TransactionReference'
+      required:
+        - RequestHeader
+        - TransactionReference
+    TransactionAssertRefundResponse:
+      type: object
+      title: TransactionAssertRefundResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        TransactionId:
+          type: string
+        OrderId:
+          type: string
+        Status:
+          type: string
+        Date:
+          type: string
+          format: date
+      required:
+        - ResponseHeader
+        - TransactionId
+        - Status
+    TransactionRefundDirectRequest:
+      type: object
+      title: TransactionRefundDirectRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TerminalId:
+          type: string
+        Refund:
+          $ref: '#/components/schemas/Refund'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeans'
+      required:
+        - RequestHeader
+        - TerminalId
+        - Refund
+        - PaymentMeans
+    TransactionRefundDirectResponse:
+      type: object
+      title: TransactionRefundDirectResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Transaction:
+          $ref: '#/components/schemas/RefundTransaction'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        Dcc:
+          $ref: '#/components/schemas/DccInfo'
+      required:
+        - ResponseHeader
+        - Transaction
+        - PaymentMeans
+    TransactionCancelRequest:
+      type: object
+      title: TransactionCancelRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TransactionReference:
+          $ref: '#/components/schemas/TransactionReference'
+      required:
+        - RequestHeader
+        - TransactionReference
+    TransactionCancelResponse:
+      type: object
+      title: TransactionCancelResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        TransactionId:
+          type: string
+        OrderId:
+          type: string
+        Date:
+          type: string
+          format: date
+      required:
+        - ResponseHeader
+        - TransactionId
+        - Date
+    TransactionRedirectPaymentRequest:
+      type: object
+      title: TransactionRedirectPaymentRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TerminalId:
+          type: string
+        Payment:
+          $ref: '#/components/schemas/Payment'
+        ServiceProvider:
+          type: string
+        Payer:
+          $ref: '#/components/schemas/Payer'
+        ReturnUrls:
+          $ref: '#/components/schemas/ReturnUrls'
+        Styling:
+          $ref: '#/components/schemas/Styling'
+        Notification:
+          $ref: '#/components/schemas/Notification'
+      required:
+        - RequestHeader
+        - TerminalId
+        - Payment
+        - ServiceProvider
+        - ReturnUrls
+    TransactionRedirectPaymentResponse:
+      type: object
+      title: TransactionRedirectPaymentResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Token:
+          type: string
+        Expiration:
+          type: string
+          format: date
+        RedirectUrl:
+          type: string
+      required:
+        - ResponseHeader
+        - Token
+        - Expiration
+    TransactionAssertRedirectPaymentRequest:
+      type: object
+      title: TransactionAssertRedirectPaymentRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        Token:
+          type: string
+      required:
+        - RequestHeader
+        - Token
+    TransactionAssertRedirectPaymentResponse:
+      type: object
+      title: TransactionAssertRedirectPaymentResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Transaction:
+          $ref: '#/components/schemas/PaymentTransaction'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        Payer:
+          $ref: '#/components/schemas/PayerInfo'
+      required:
+        - ResponseHeader
+        - Transaction
+        - PaymentMeans
+    AliasInsertRequest:
+      type: object
+      title: AliasInsertRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        RegisterAlias:
+          $ref: '#/components/schemas/RegisterAlias'
+        Type:
+          type: string
+        ReturnUrls:
+          $ref: '#/components/schemas/ReturnUrls'
+        Styling:
+          $ref: '#/components/schemas/Styling'
+        LanguageCode:
+          type: string
+        Check:
+          $ref: '#/components/schemas/AliasInsertCheck'
+        PaymentMethods:
+          type: array
+          items:
+            type: string
+        CardForm:
+          $ref: '#/components/schemas/CardForm'
+      required:
+        - RequestHeader
+        - RegisterAlias
+        - Type
+        - ReturnUrls
+    AliasInsertResponse:
+      type: object
+      title: AliasInsertResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Token:
+          type: string
+        Expiration:
+          type: string
+          format: date
+        RedirectUrl:
+          type: string
+      required:
+        - ResponseHeader
+        - Token
+        - Expiration
+        - RedirectUrl
+    AliasAssertInsertRequest:
+      type: object
+      title: AliasAssertInsertRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        Token:
+          type: string
+      required:
+        - RequestHeader
+        - Token
+    AliasAssertInsertResponse:
+      type: object
+      title: AliasAssertInsertResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Alias:
+          $ref: '#/components/schemas/AliasInfo'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        CheckResult:
+          $ref: '#/components/schemas/AliasInsertCheckResult'
+      required:
+        - ResponseHeader
+        - Alias
+        - PaymentMeans
+    AliasInsertDirectRequest:
+      type: object
+      title: AliasInsertDirectRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        RegisterAlias:
+          $ref: '#/components/schemas/RegisterAlias'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeans'
+        Check:
+          $ref: '#/components/schemas/AliasInsertCheck'
+      required:
+        - RequestHeader
+        - RegisterAlias
+        - PaymentMeans
+    AliasInsertDirectResponse:
+      type: object
+      title: AliasInsertDirectResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Alias:
+          $ref: '#/components/schemas/AliasInfo'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        CheckResult:
+          $ref: '#/components/schemas/AliasInsertCheckResult'
+      required:
+        - ResponseHeader
+        - Alias
+        - PaymentMeans
+    AliasDeleteRequest:
+      type: object
+      title: AliasDeleteRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        AliasId:
+          type: string
+      required:
+        - RequestHeader
+        - AliasId
+    AliasDeleteResponse:
+      type: object
+      title: AliasDeleteResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+      required:
+        - ResponseHeader
+    BatchCloseRequest:
+      type: object
+      title: BatchCloseRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TerminalId:
+          type: string
+      required:
+        - RequestHeader
+        - TerminalId
+    BatchCloseResponse:
+      type: object
+      title: BatchCloseResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+      required:
+        - ResponseHeader
+    OmniChannelInsertAliasRequest:
+      type: object
+      title: OmniChannelInsertAliasRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        RegisterAlias:
+          $ref: '#/components/schemas/RegisterAlias'
+        SixTransactionReference:
+          type: string
+      required:
+        - RequestHeader
+        - RegisterAlias
+        - SixTransactionReference
+    OmniChannelInsertAliasResponse:
+      type: object
+      title: OmniChannelInsertAliasResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Alias:
+          $ref: '#/components/schemas/AliasInfo'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+        CheckResult:
+          $ref: '#/components/schemas/AliasInsertCheckResult'
+      required:
+        - ResponseHeader
+        - Alias
+        - PaymentMeans
+    OmniChannelAcquireTransactionRequest:
+      type: object
+      title: OmniChannelAcquireTransactionRequest
+      properties:
+        RequestHeader:
+          $ref: '#/components/schemas/RequestHeader'
+        TerminalId:
+          type: string
+        OrderId:
+          type: string
+        SixTransactionReference:
+          type: string
+      required:
+        - RequestHeader
+        - TerminalId
+        - SixTransactionReference
+    OmniChannelAcquireTransactionResponse:
+      type: object
+      title: OmniChannelAcquireTransactionResponse
+      properties:
+        ResponseHeader:
+          $ref: '#/components/schemas/ResponseHeader'
+        Transaction:
+          $ref: '#/components/schemas/PaymentTransaction'
+        PaymentMeans:
+          $ref: '#/components/schemas/PaymentMeansInfo'
+      required:
+        - ResponseHeader
+        - Transaction
+        - PaymentMeans
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  requestBodies:
+    PaymentPageInitialize:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PaymentPageInitializeRequest'
+    PaymentPageAssert:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PaymentPageAssertRequest'
+    TransactionInitialize:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionInitializeRequest'
+    TransactionAuthorize:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAuthorizeRequest'
+    TransactionQueryPaymentMeans:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionQueryPaymentMeansRequest'
+    TransactionAdjustAmount:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAdjustAmountRequest'
+    TransactionAuthorizeDirect:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAuthorizeDirectRequest'
+    TransactionAuthorizeReferenced:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAuthorizeReferencedRequest'
+    TransactionCapture:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionCaptureRequest'
+    TransactionMultipartCapture:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionMultipartCaptureRequest'
+    TransactionAssertCapture:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAssertCaptureRequest'
+    TransactionMultipartFinalize:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionMultipartFinalizeRequest'
+    TransactionRefund:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionRefundRequest'
+    TransactionAssertRefund:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAssertRefundRequest'
+    TransactionRefundDirect:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionRefundDirectRequest'
+    TransactionCancel:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionCancelRequest'
+    TransactionRedirectPayment:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionRedirectPaymentRequest'
+    TransactionAssertRedirectPayment:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAssertRedirectPaymentRequest'
+    AliasInsert:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AliasInsertRequest'
+    AliasAssertInsert:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AliasAssertInsertRequest'
+    AliasInsertDirect:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AliasInsertDirectRequest'
+    AliasDelete:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AliasDeleteRequest'
+    BatchClose:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BatchCloseRequest'
+    OmniChannelInsertAlias:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OmniChannelInsertAliasRequest'
+    OmniChannelAcquireTransaction:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OmniChannelAcquireTransactionRequest'
+  responses:
+    PaymentPageInitialize:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PaymentPageInitializeResponse'
+    PaymentPageAssert:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PaymentPageAssertResponse'
+    TransactionInitialize:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionInitializeResponse'
+    TransactionAuthorize:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAuthorizeResponse'
+    TransactionQueryPaymentMeans:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionQueryPaymentMeansResponse'
+    TransactionAdjustAmount:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAdjustAmountResponse'
+    TransactionAuthorizeDirect:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAuthorizeDirectResponse'
+    TransactionAuthorizeReferenced:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAuthorizeReferencedResponse'
+    TransactionCapture:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionCaptureResponse'
+    TransactionMultipartCapture:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionMultipartCaptureResponse'
+    TransactionAssertCapture:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAssertCaptureResponse'
+    TransactionMultipartFinalize:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionMultipartFinalizeResponse'
+    TransactionRefund:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionRefundResponse'
+    TransactionAssertRefund:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAssertRefundResponse'
+    TransactionRefundDirect:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionRefundDirectResponse'
+    TransactionCancel:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionCancelResponse'
+    TransactionRedirectPayment:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionRedirectPaymentResponse'
+    TransactionAssertRedirectPayment:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionAssertRedirectPaymentResponse'
+    AliasInsert:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AliasInsertResponse'
+    AliasAssertInsert:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AliasAssertInsertResponse'
+    AliasInsertDirect:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AliasInsertDirectResponse'
+    AliasDelete:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AliasDeleteResponse'
+    BatchClose:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BatchCloseResponse'
+    OmniChannelInsertAlias:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OmniChannelInsertAliasResponse'
+    OmniChannelAcquireTransaction:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OmniChannelAcquireTransactionResponse'

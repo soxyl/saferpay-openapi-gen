@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application('Saferpay OpenAPI Spec Generator', '1.0.0');
+
+$application->add(new \Soxyl\Saferpay\OpenAPIGen\Commands\GenerateCommad());
+
+$application->run();

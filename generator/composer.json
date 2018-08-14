@@ -9,5 +9,13 @@
             "email": "s@wicky.io"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {"Soxyl\\Saferpay\\OpenAPIGen\\": "src/"}
+    },
+    "require": {
+        "symfony/dom-crawler": "^4.1",
+        "symfony/console": "^4.1",
+        "symfony/css-selector": "^4.1",
+        "symfony/yaml": "^4.1"
+    }
 }
