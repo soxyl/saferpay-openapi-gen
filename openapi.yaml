@@ -2302,7 +2302,7 @@ components:
           type: string
         Date:
           type: string
-          format: date
+          format: date-time
         Amount:
           $ref: '#/components/schemas/Amount'
         OrderId:
@@ -2576,7 +2576,7 @@ components:
           type: string
         Expiration:
           type: string
-          format: date
+          format: date-time
         RedirectUrl:
           type: string
       required:
