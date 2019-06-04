@@ -2660,7 +2660,7 @@ components:
           type: string
         Expiration:
           type: string
-          format: date
+          format: date-time
         LiabilityShift:
           type: boolean
         RedirectRequired:
@@ -3123,7 +3123,7 @@ components:
           type: string
         Expiration:
           type: string
-          format: date
+          format: date-time
         RedirectUrl:
           type: string
       required:
@@ -3196,7 +3196,7 @@ components:
           type: string
         Expiration:
           type: string
-          format: date
+          format: date-time
         RedirectUrl:
           type: string
       required:
